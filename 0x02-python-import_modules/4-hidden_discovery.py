@@ -8,6 +8,8 @@ if __name__ == "__main__":
     else:
         module = importlib.util.module_from_spec(module_spec)
         module_spec.loader.exec_module(module)
-        visible_attributes = [attribute for attribute in dir(module) if not attribute.startswith("__")]
+        visible_attributes = [
+            attribute for attribute in dir(module) if not attribute.startswith("__")
+        ]
         for attribute in visible_attributes:
             print(attribute)

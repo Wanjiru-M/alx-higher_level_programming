@@ -1,2 +1,3 @@
 #!/usr/bin/python3
-print(''.join(chr(97 + i) for i in range(26)), end='')
+for ascii_value in range(ord('a'), ord('z')+1):
+print("{}".format(chr(ascii_value)), end='')

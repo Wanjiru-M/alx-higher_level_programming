@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 
-for j in range(122, 96, -1):
-    if j % 2 == 0:
-        c = j
+for i in range(122, 96, -1):
+    if i % 2 == 0:
+        a = i
     else:
-        c = j - 32
+        a = i - 32
     print("{}".format(chr(a)), end="")
+
+

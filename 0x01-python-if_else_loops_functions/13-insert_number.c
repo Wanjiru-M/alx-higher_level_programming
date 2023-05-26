@@ -2,15 +2,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-/**
- * insert_node - inserts a number in an ordered linked list
- * @head: double pointer to the linked list
- * @number: number to insert in the new node
- *
- * Return: address of the new node, or NULL
- */
 listint_t *insert_node(listint_t **head, int number)
 {
+	if (!head)
+		return NULL;
+
 	listint_t *new_node = malloc(sizeof(listint_t));
 	if (!new_node)
 		return NULL;

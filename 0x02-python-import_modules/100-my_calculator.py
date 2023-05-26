@@ -3,13 +3,15 @@
 from calculator_1 import add, sub, mul, div
 import sys
 
+
 def calculate(operand_a, operator, operand_b):
     operations = {"+": add, "-": sub, "*": mul, "/": div}
     if operator not in operations.keys():
         print("Unknown operator. Available operators: +, -, * and /")
         sys.exit(1)
-    
+
     return operations[operator](operand_a, operand_b)
+
 
 if __name__ == "__main__":
     """

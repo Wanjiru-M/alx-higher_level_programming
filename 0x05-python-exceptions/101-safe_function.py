@@ -6,7 +6,7 @@ def safe_function(function, *args):
         solution = function(*args)
         return solution
     except Exception as error:
-        error_message = f"Exception: {error!s}\n".format(**{"error": error})
+        error_message = f"Exception: {error!s}\n".format_map({"error": error})
         sys.stderr.write(error_message)
         solution = None
 

@@ -1,9 +1,13 @@
 #!/usr/bin/python3
 import sys
+
+
 def safe_print_integer_err(value):
     try:
-        print("%d" % int(value))
+        formatted_value = "{:d}".format(value)
+        print(formatted_value)
         return True
-    except Exception as e:
-        print("Exception: %s" % e, file=sys.stderr)
+    except (ValueError, TypeError) as error:
+        error_message = "Exception: {}".format(error)
+        print(error_message, file=sys.stderr)
         return False

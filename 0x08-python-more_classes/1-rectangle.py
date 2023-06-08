@@ -47,3 +47,7 @@ class Rectangle:
     def perimeter(self):
         """Return the perimeter of the rectangle."""
         return 2 * (self._width + self._height)
+
+    def dict(self):
+        """Return a dictionary representation of the rectangle."""
+        return {'_Rectangle__width': self._width, '_Rectangle__height': self._height}

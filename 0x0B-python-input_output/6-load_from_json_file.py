@@ -8,5 +8,4 @@ def load_from_json_file(filename):
     with open(filename) as file:
         json_str = file.read()
     data = ast.literal_eval(json_str)
-    return data
-
+       return data

@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""Defines a class Student."""
+
+#!/usr/bin/python3
 
 class Student:
     """Class representing a student"""

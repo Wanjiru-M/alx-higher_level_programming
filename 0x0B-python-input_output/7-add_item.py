@@ -3,16 +3,17 @@
 import sys
 
 
-from 5-save_to_json_file import save_to_json_file
-from 6-load_from_json_file import load_from_json_file
-
-args = sys.argv[1:]
-filename = "add_item.json"
+if name == "main":
+save_to_json_file = import('5-save_to_json_file').save_to_json_file
+load_from_json_file = import('6-load_from_json_file').load_from_json_file
 
 try:
-    data = load_from_json_file(filename)
+    existing_items = load_from_json_file("add_item.json")
 except FileNotFoundError:
-    data = []
-for arg in args:
-    data.append(arg)
-save_to_json_file(data, filename)
+    existing_items = []
+
+new_items = sys.argv[1:]
+
+items = existing_items + new_items
+
+save_to_json_file(items, "add_item.json")

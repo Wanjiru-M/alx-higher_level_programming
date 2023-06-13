@@ -24,13 +24,13 @@ def load_from_json_file(filename: str):
 def add_items_to_list(items: List):
     """Add items to list and save to file"""
     filename = "add_item.json"
-    
+
     if path.exists(filename):
         my_list = load_from_json_file(filename)
         my_list.extend(items)
     else:
         my_list = items
-    
+
     save_to_json_file(my_list, filename)
 
 

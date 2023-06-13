@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-function that reads a text file
+Reads the contents of a UTF-8 text file
 """
 
 

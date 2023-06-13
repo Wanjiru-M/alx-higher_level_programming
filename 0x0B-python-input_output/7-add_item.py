@@ -1,25 +1,39 @@
 #!/usr/bin/python3
-"""Module 9-add_item.
-Adds all arguments to a Python list,
-and then save them to a file.
+"""
+Script that adds all arguments to a Python list and saves them to a file.
 """
 
 import sys
-import json
-import os.path
+from os import path
+from json import dump, load
+from typing import List
 
-save_func = import("5-save_to_json_file").save_to_json_file
-load_func = import("6-load_from_json_file").load_from_json_file
 
-file_name = 'add_item.json'
+def save_to_json_file(my_obj: List, filename: str):
+    """Save object to JSON file"""
+    with open(filename, 'w') as file:
+        dump(my_obj, file)
 
-my_list = []
 
-if os.path.exists(file_name) and os.path.getsize(file_name) > 0:
-my_list = load_func(file_name)
+def load_from_json_file(filename: str):
+    """Load object from JSON file"""
+    with open(filename, 'r') as file:
+        return load(file)
 
-if len(sys.argv) > 1:
-for elem in sys.argv[1:]:
-my_list.append(elem)
 
-save_func(my_list, file_name)
+def add_items_to_list(items: List):
+    """Add items to list and save to file"""
+    filename = "add_item.json"
+    
+    if path.exists(filename):
+        my_list = load_from_json_file(filename)
+        my_list.extend(items)
+    else:
+        my_list = items
+    
+    save_to_json_file(my_list, filename)
+
+
+if __name__ == "__main__":
+    args = sys.argv[1:]
+    add_items_to_list(args)

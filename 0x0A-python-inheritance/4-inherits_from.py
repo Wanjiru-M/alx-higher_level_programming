@@ -4,9 +4,4 @@
 
 def inherits_from(obj, a_class):
     """Traversing the object's class hierarchy"""
-    current_class = type(obj)
-    while current_class != object:
-        if current_class == a_class:
-            return True
-        current_class = current_class.__base__
-    return False
+    return issubclass(type(obj), a_class) and type(obj) is not a_class

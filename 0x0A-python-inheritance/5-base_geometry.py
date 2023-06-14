@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 """Defines an empty class BaseGeometry."""
 
-class MetaBaseGeometry(type):
-    """Using a metaclass to define an empty class"""
-    pass
 
-class BaseGeometry(metaclass=MetaBaseGeometry):
+class BaseGeometry(object):
+    """Using the object class as the base class"""
     pass

@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """A function that adds a new line of text to an existing file"""
+import subprocess
 
 
 def append_after(filename="", search_string="", new_string=""):
@@ -15,5 +16,5 @@ def append_after(filename="", search_string="", new_string=""):
     with open(temp_filename, 'r') as temp_file, open(filename, 'w') as file:
         for line in temp_file:
             file.write(line)
+            subprocess.run(["rm", temp_filename])
 
-    os.remove(temp_filename)

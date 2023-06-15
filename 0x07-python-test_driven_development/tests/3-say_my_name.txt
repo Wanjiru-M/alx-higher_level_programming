@@ -1,0 +1,37 @@
+guillaume@ubuntu:~/0x07$ cat tests/3-say_my_name.txt
+guillaume@ubuntu:~/0x07$ cat tests/3-say_my_name.txt
+```python
+#!/usr/bin/python3
+"""
+Test cases for the say_my_name function.
+"""
+import unittest
+from io import StringIO
+from contextlib import redirect_stdout
+from say_my_name import say_my_name
+
+class TestSayMyName(unittest.TestCase):
+    def test_say_my_name(self):
+        with StringIO() as output:
+            with redirect_stdout(output):
+                say_my_name("John", "Smith")
+                self.assertEqual(output.getvalue(), "My name is John Smith\n")
+
+            with redirect_stdout(output):
+                say_my_name("Walter", "White")
+                self.assertEqual(output.getvalue(), "My name is Walter White\n")
+
+            with redirect_stdout(output):
+                say_my_name("Bob")
+                self.assertEqual(output.getvalue(), "My name is Bob\n")
+
+            with self.assertRaises(TypeError) as e:
+                say_my_name(12, "White")
+                self.assertEqual(str(e.exception), "first_name must be a string")
+
+            with self.assertRaises(TypeError) as e:
+                say_my_name("John", 42)
+                self.assertEqual(str(e.exception), "last_name must be a string")
+
+if __name__ == '__main__':
+    unittest.main()

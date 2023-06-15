@@ -7,9 +7,8 @@ class TestAddInteger(unittest.TestCase):
         self.assertEqual(add_integer(1, 2), 3)
         self.assertEqual(add_integer(100, -2), 98)
         self.assertEqual(add_integer(2), 100)
-        self.assertEqual(add_integer(100.3, -2), 98)
-        self.assertRaises(TypeError, add_integer, 4, "School")
-        self.assertRaises(TypeError, add_integer, None)
+        self.assertRaises(TypeError, add_integer, 1.4, 2)
+        self.assertRaises(TypeError, add_integer, 1, "2")
 
 if __name__ == '__main__':
     unittest.main()

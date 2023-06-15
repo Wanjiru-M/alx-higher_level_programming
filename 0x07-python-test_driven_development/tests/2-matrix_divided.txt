@@ -3,45 +3,36 @@ from matrix_divided import matrix_divided
 
 class TestMatrixDivided(unittest.TestCase):
 
-    def test_matrix_divided(self):
-        matrix = [
-            [1, 2, 3],
-            [4, 5, 6]
-        ]
-        expected_result = [
-            [0.33, 0.67, 1.0],
-            [1.33, 1.67, 2.0]
-        ]
+    def test_matrix_divided_valid_division(self):
+        matrix = [[3]]
+        expected_result = [[1.0]]
         self.assertEqual(matrix_divided(matrix, 3), expected_result)
-        self.assertEqual(matrix, [[1, 2, 3], [4, 5, 6]])
+        self.assertEqual(matrix, [[3]])
 
-        matrix = [
-            [10, 20],
-            [30, 40],
-            [50, 60]
-        ]
-        expected_result = [
-            [2.5, 5.0],
-            [7.5, 10.0],
-            [12.5, 15.0]
-        ]
-        self.assertEqual(matrix_divided(matrix, 4), expected_result)
-        self.assertEqual(matrix, [[10, 20], [30, 40], [50, 60]])
+        matrix = [[3, 9], [12, 15]]
+        expected_result = [[-1.0, -2.67], [-4.0, -3.67]]
+        self.assertEqual(matrix_divided(matrix, -3), expected_result)
+        self.assertEqual(matrix, [[3, 9], [12, 15]])
 
-        matrix = [
-            [1.5, 2.5, 3.5],
-            [4.5, 5.5, 6.5]
-        ]
-        expected_result = [
-            [0.5, 0.83, 1.17],
-            [1.5, 1.83, 2.17]
-        ]
-        self.assertEqual(matrix_divided(matrix, 3), expected_result)
-        self.assertEqual(matrix, [[1.5, 2.5, 3.5], [4.5, 5.5, 6.5]])
+    def test_matrix_divided_zero_division(self):
+        matrix = [[3, 9], [12, 15]]
+        self.assertRaises(ZeroDivisionError, matrix_divided, matrix, 0)
 
-        self.assertRaises(TypeError, matrix_divided, [[1, 2], [3, 4, 5]], 2)
-        self.assertRaises(TypeError, matrix_divided, [[1, 2], [3, 4]], "div")
-        self.assertRaises(ZeroDivisionError, matrix_divided, [[1, 2], [3, 4]], 0)
+    def test_matrix_divided_invalid_matrix(self):
+        matrix = [[3, "9"], [15, 3]]
+        self.assertRaises(TypeError, matrix_divided, matrix, 3)
+
+    def test_matrix_divided_invalid_div_type(self):
+        matrix = [[3, 9], [12, 15]]
+        self.assertRaises(TypeError, matrix_divided, matrix, "div")
+
+    def test_matrix_divided_invalid_matrix_type(self):
+        matrix = "not a list of lists of integers"
+        self.assertRaises(TypeError, matrix_divided, matrix, 3)
+
+    def test_matrix_divided_invalid_matrix_size(self):
+        matrix = [[3, 9], [12, 15, 3]]
+        self.assertRaises(TypeError, matrix_divided, matrix, 3)
 
 if __name__ == '__main__':
     unittest.main()

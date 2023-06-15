@@ -4,11 +4,12 @@
 
 def append_after(filename="", search_string="", new_string=""):
     """A function that inserts a line of text"""
-     with open(filename, 'r') as file:
-        lines = file.readlines()
+    temp_filename = filename + ".tmp"
 
-    with open(filename, 'w') as file:
-        for line in lines:
-            file.write(line)
+    with open(filename, 'r') as file, open(temp_filename, 'w') as temp_file:
+        for line in file:
+            temp_file.write(line)
             if search_string in line:
-                file.write(new_string)
+                temp_file.write(new_string)
+
+    os.replace(temp_filename, filename)

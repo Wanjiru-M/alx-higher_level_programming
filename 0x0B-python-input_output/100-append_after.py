@@ -12,4 +12,8 @@ def append_after(filename="", search_string="", new_string=""):
             if search_string in line:
                 temp_file.write(new_string)
 
-    os.replace(temp_filename, filename)
+    with open(temp_filename, 'r') as temp_file, open(filename, 'w') as file:
+        for line in temp_file:
+            file.write(line)
+
+    os.remove(temp_filename)

@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """A function that adds a new line of text to an existing file"""
 
+import os
+
 
 def append_after(filename="", search_string="", new_string=""):
     """A function that inserts a line of text"""
@@ -16,5 +18,4 @@ def append_after(filename="", search_string="", new_string=""):
         for line in temp_file:
             file.write(line)
 
-            os.remove(temp_filename)
-
+    os.remove(temp_filename)

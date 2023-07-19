@@ -1,3 +1,3 @@
--- list the privileges of MySQL users user_0d_1 and user_0d_2 
-SHOW GRANTS FOR 'user_0d_1'@'localhost';
-SHOW GRANTS FOR 'user_0d_2'@'localhost';
+--listtheprivilegesofMySQLusersuser_0d_1anduser_0d_2
+SHOWGRANTSFOR'user_0d_1'@'localhost';
+SHOWGRANTSFOR'user_0d_2'@'localhost';

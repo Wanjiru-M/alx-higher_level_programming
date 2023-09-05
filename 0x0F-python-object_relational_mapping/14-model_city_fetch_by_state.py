@@ -1,23 +1,27 @@
 #!/usr/bin/python3
-"""prints all City objects
-from the database hbtn_0e_14_usa"""
 
-if __name__ == "__main__":
-
-    import sys
+"""
+Module that connects python script to a database
+"""
+from sys import argv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from model_state import State
+from model_state import Base, State
 from model_city import City
 
 if __name__ == "__main__":
-    engine = create_engine("mysql+mysqldb://{}:{}@localhost/{}"
-                           .format(sys.argv[1], sys.argv[2], sys.argv[3]),
-                           pool_pre_ping=True)
-    Session = sessionmaker(bind=engine)
-    session = Session()
 
-    for city, state in session.query(City, State) \
-                              .filter(City.state_id == State.id) \
-                              .order_by(City.id):
+    engine = create_engine(
+        'mysql+mysqldb://{}:{}@localhost/{}'
+        .format(argv[1], argv[2], argv[3]),
+        pool_pre_ping=True
+    )
+
+    my_session_maker = sessionmaker(bind=engine)
+    my_session = my_session_maker()
+
+    for state, city in my_session.query(State, City).filter(
+            State.id == City.state_id).all():
         print("{}: ({}) {}".format(state.name, city.id, city.name))
+
+    my_session.close()

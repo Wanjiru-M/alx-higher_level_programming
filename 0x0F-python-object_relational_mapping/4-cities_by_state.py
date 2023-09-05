@@ -1,21 +1,43 @@
 #!/usr/bin/python3
-"""A script that lists all cities
- from the database hbtn_0e_4_usa"""
+"""
+Module that connects a python script to a database
+"""
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     import MySQLdb
-    import sys
+    from sys import argv
 
-    db = MySQLdb.connect(host='localhost', port=3306,
-                         user=sys.argv[1], passwd=sys.argv[2], db=sys.argv[3])
+    # Connect database using command-line arguments
+    my_db = MySQLdb.connect(
+        host='localhost',
+        user=argv[1],
+        password=argv[2],
+        db=argv[3],
+        port=3306
+    )
 
-    cur = db.cursor()
-    cur.execute("SELECT cities.id, cities.name, states.name\
-                FROM cities LEFT JOIN states\
-                ON states.id = cities.state_id\
-                ORDER BY cities.id ASC")
-    rows = cur.fetchall()
-    for row in rows:
+    # Create cursor obj to interact with database
+    my_cursor = my_db.cursor()
+
+    # Execute a SELECT query to fetch data
+    my_cursor.execute(
+        """SELECT cities.id, cities.name, states.name
+        FROM cities
+        JOIN states
+        ON states.id = cities.state_id
+        ORDER BY cities.id"""
+    )
+
+    # fetch all the data returned by the query
+    my_data = my_cursor.fetchall()
+
+    # Iterate through the fetched data and print each row
+    for row in my_data:
         print(row)
 
+    # Close all cursors
+    my_cursor.close()
+
+    # Close all databases
+    my_db.close()

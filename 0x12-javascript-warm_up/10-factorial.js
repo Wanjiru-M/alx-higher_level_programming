@@ -1,13 +1,21 @@
 #!/usr/bin/node
-const numb = process.argv[2];
 
-function factorial (numb) {
-  if (numb <= 1 || isNaN(numb)) {
+const process = require('process');
+const firstArg = process.argv[2];
+const num = parseInt(firstArg);
+
+function calcFactorial (x) {
+  if (isNaN(x)) {
+    return 1;
+  } else if (x === 0) {
     return 1;
   } else {
-    return numb * factorial(numb - 1);
+    return x * calcFactorial(x - 1);
   }
 }
 
-console.log(factorial(numb));
-
+if (!isNaN(num)) {
+  console.log(calcFactorial(num));
+} else {
+  console.log('1');
+}

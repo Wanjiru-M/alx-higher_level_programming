@@ -1,23 +1,41 @@
 #!/usr/bin/python3
-"""A script that takes in the name of
-a state as an argument and list * cities"""
+"""
+Module that connects a python script to a database
+"""
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     import MySQLdb
-    import sys
+    from sys import argv
 
-    db = MySQLdb.connect(host='localhost', port=3306,
-                         user=sys.argv[1], passwd=sys.argv[2], db=sys.argv[3])
+    # Connect database using command-line arguments
+    my_db = MySQLdb.connect(
+        host='localhost',
+        user=argv[1],
+        password=argv[2],
+        db=argv[3],
+        port=3306
+    )
 
-    cur = db.cursor()
-    cur.execute("SELECT cities.name\
-                FROM cities LEFT JOIN states\
-                ON states.id = cities.state_id\
-                WHERE states.name = %s\
-                ORDER BY cities.id ASC", (sys.argv[4],))
-    rows = cur.fetchall()
-    print(", ".join([row[0] for row in rows]))
-    cur.close()
-    db.close()
+    # Create cursor obj to interact with database
+    my_cursor = my_db.cursor()
 
+    # Execute a SELECT query to fetch data
+    my_cursor.execute(
+        """SELECT * FROM cities
+        INNER JOIN states
+        ON cities.state_id = states.id
+        ORDER BY cities.id"""
+    )
+
+    print(", ".join([city[2]
+                     for city in my_cursor.fetchall()
+                     if city[4] == argv[4]])
+
+          )
+
+    # Close all cursors
+    my_cursor.close()
+
+    # Close all databases
+    my_db.close()
